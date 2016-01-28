@@ -10,11 +10,13 @@ import static org.junit.Assert.assertTrue;
 
 public class GuessNumberTest {
     private GuessNumber guesser;
+    private GuessNumber fakeGuesser;
     private int userGuess = 936;
 
     @Before
     public void setUp(){
         this.guesser = new GuessNumber();
+        this.fakeGuesser = new GuessNumber(true);
     }
 
     @Test
@@ -61,14 +63,26 @@ public class GuessNumberTest {
 
     @Test
     public void shoudlGiveUserTipsGreaterMessage(){
-        GuessNumber raffled = new GuessNumber(true);
-        raffled.setUserGuess(600);
-        assertTrue(raffled.getUserGuess() > raffled.getRandomNumber());
+        this.fakeGuesser.setUserGuess(600);
+        assertTrue(this.fakeGuesser.getUserGuess() > this.fakeGuesser.getRandomNumber());
         assertEquals(
             "Wrong tip message for userGuess greater than randomNumber",
             "Your guess is greater than the raffled number =(",
-            raffled.checkUserGuess()
+            this.fakeGuesser.checkUserGuess()
         );
+    }
 
+    @Test
+    public void shouldReturnNumberOfTrialsWhenGuessMatchRandomNumber(){
+        this.fakeGuesser.setUserGuess(100);
+        this.fakeGuesser.setUserGuess(200);
+        this.fakeGuesser.setUserGuess(300);
+        this.fakeGuesser.setUserGuess(400);
+        this.fakeGuesser.setUserGuess(500);
+
+        int expectedTrials = 5;
+        int actualTrials = this.fakeGuesser.getTrials();
+
+        assertEquals("Number of trials is not being stored correctly", expectedTrials, actualTrials);
     }
 }

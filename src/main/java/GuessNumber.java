@@ -5,6 +5,7 @@ public class GuessNumber {
     private int randomNumber;
     private int userGuess;
     private String message;
+    private int trials;
 
     public GuessNumber(){
         this.randomNumber = (int) (Math.random() * 1000);
@@ -25,10 +26,11 @@ public class GuessNumber {
 
     public void setUserGuess(int userGuess) {
         this.userGuess = userGuess;
+        this.trials ++;
     }
 
     public int getUserGuess() {
-        return userGuess;
+        return this.userGuess;
     }
 
     private void setRandomNumber(int randomNumber) {
@@ -43,5 +45,9 @@ public class GuessNumber {
             this.message = "Your guess is greater than the raffled number =(";
         }
         return message;
+    }
+
+    public int getTrials() {
+        return this.trials;
     }
 }
