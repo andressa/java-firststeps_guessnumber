@@ -12,7 +12,6 @@ public class GuessNumberTest {
     private GuessNumber guesser;
     private GuessNumber fakeGuesser;
     private int userGuess = 936;
-    private String userGuessTip;
 
     @Before
     public void setUp(){
