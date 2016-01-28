@@ -37,12 +37,13 @@ public class GuessNumber {
         this.randomNumber = randomNumber;
     }
 
-    public String checkUserGuess() {
+    public String checkUserGuess() throws MaiorQueException{
         this.message = null;
         if (this.userGuess < this.randomNumber){
             this.message = "Your guess is lower than the raffled number =(";
         }else{
             this.message = "Your guess is greater than the raffled number =(";
+            throw new MaiorQueException();
         }
         return message;
     }
