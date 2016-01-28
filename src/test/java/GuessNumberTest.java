@@ -44,4 +44,31 @@ public class GuessNumberTest {
 
         assertEquals("GuessUser.userGuess is not equal to this.userGuess", expectedUserGuess, actualUserGuess);
     }
+
+
+    @Test
+    public void shouldGiveUserTipsLowerMessage(){
+        // GuessNumber(fake=true), indicates that randomNumber = 500;
+        GuessNumber raffled = new GuessNumber(true);
+        raffled.setUserGuess(400);
+        assertTrue(raffled.getUserGuess() < raffled.getRandomNumber());
+        assertEquals(
+            "Wrong tip message for userGuess lower than randomNumber",
+            "Your guess is lower than the raffled number =(",
+            raffled.checkUserGuess()
+        );
+    }
+
+    @Test
+    public void shoudlGiveUserTipsGreaterMessage(){
+        GuessNumber raffled = new GuessNumber(true);
+        raffled.setUserGuess(600);
+        assertTrue(raffled.getUserGuess() > raffled.getRandomNumber());
+        assertEquals(
+            "Wrong tip message for userGuess greater than randomNumber",
+            "Your guess is greater than the raffled number =(",
+            raffled.checkUserGuess()
+        );
+
+    }
 }
