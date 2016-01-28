@@ -33,19 +33,24 @@ public class GuessNumber {
         return this.userGuess;
     }
 
-    private void setRandomNumber(int randomNumber) {
-        this.randomNumber = randomNumber;
-    }
-
-    public String checkUserGuess() throws MaiorQueException{
-        this.message = null;
-        if (this.userGuess < this.randomNumber){
-            this.message = "Your guess is lower than the raffled number =(";
-        }else{
-            this.message = "Your guess is greater than the raffled number =(";
+    public void grabUserTips() throws MaiorQueException, MenorQueException {
+        if (this.userGuess < this.randomNumber) {
+            throw new MenorQueException();
+        } else {
             throw new MaiorQueException();
         }
-        return message;
+    }
+
+    public String checkUserGuess() throws MaiorQueException, MenorQueException{
+        this.message = null;
+        try{
+            this.grabUserTips();
+        } catch (MaiorQueException exception){
+            this.message = "Your guess is greater than the raffled number =(";
+        } catch (MenorQueException exception) {
+            this.message = "Your guess is lower than the raffled number =(";
+        }
+        return this.message;
     }
 
     public int getTrials() {

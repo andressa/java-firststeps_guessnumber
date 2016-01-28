@@ -50,7 +50,7 @@ public class GuessNumberTest {
 
 
     @Test
-    public void shouldGiveUserTipsLowerMessage() throws MaiorQueException{
+    public void shouldGiveUserTipsLowerMessage() throws MaiorQueException, MenorQueException{
         // GuessNumber(fake=true), indicates that randomNumber = 500;
         this.fakeGuesser.setUserGuess(400);
         assertTrue(this.fakeGuesser.getUserGuess() < this.fakeGuesser.getRandomNumber());
@@ -62,7 +62,7 @@ public class GuessNumberTest {
     }
 
     @Test
-    public void shoudlGiveUserTipsGreaterMessage() throws MaiorQueException{
+    public void shoudlGiveUserTipsGreaterMessage() throws MaiorQueException, MenorQueException{
         this.fakeGuesser.setUserGuess(600);
         assertTrue(this.fakeGuesser.getUserGuess() > this.fakeGuesser.getRandomNumber());
         assertEquals(
@@ -87,8 +87,14 @@ public class GuessNumberTest {
     }
 
     @Test(expected = MaiorQueException.class)
-    public void shouldReturnMaiorQueException() throws MaiorQueException{
+    public void shouldReturnMaiorQueException() throws MaiorQueException, MenorQueException{
         this.fakeGuesser.setUserGuess(600);
-        this.fakeGuesser.checkUserGuess();
+        this.fakeGuesser.grabUserTips();
+    }
+
+    @Test(expected = MenorQueException.class)
+    public void shouldReturnMenorQueException() throws MaiorQueException, MenorQueException{
+        this.fakeGuesser.setUserGuess(400);
+        this.fakeGuesser.grabUserTips();
     }
 }
