@@ -11,15 +11,6 @@ public class GuessNumber {
         this.randomNumber = (int) (Math.random() * 1000);
     }
 
-    public GuessNumber(boolean fake){
-        if (!fake) {
-            this.randomNumber = (int) (Math.random() * 1000);
-        } else{
-            this.randomNumber = 500;
-        }
-
-    }
-
     public int getRandomNumber() {
         return this.randomNumber;
     }
@@ -34,7 +25,7 @@ public class GuessNumber {
     }
 
     public void grabUserTips() throws MaiorQueException, MenorQueException {
-        if (this.userGuess < this.randomNumber) {
+        if (this.userGuess < this.getRandomNumber()) {
             throw new MenorQueException();
         } else {
             throw new MaiorQueException();

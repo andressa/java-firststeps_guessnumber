@@ -3,6 +3,9 @@
  */
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
+
+import static org.mockito.Mockito.*;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -15,8 +18,10 @@ public class GuessNumberTest {
 
     @Before
     public void setUp(){
+        fakeGuesser = spy(new GuessNumber());
         this.guesser = new GuessNumber();
-        this.fakeGuesser = new GuessNumber(true);
+        when(fakeGuesser.getRandomNumber()).thenReturn(500);
+
     }
 
     @Test
@@ -94,6 +99,7 @@ public class GuessNumberTest {
     @Test(expected = MenorQueException.class)
     public void shouldReturnMenorQueException() throws MaiorQueException, MenorQueException{
         this.fakeGuesser.setUserGuess(400);
+        assertEquals(500, this.fakeGuesser.getRandomNumber());
         this.fakeGuesser.grabUserTips();
     }
 }
