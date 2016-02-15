@@ -1,18 +1,16 @@
+import java.util.Random;
+
 /*
  * Created by asivolella on 2016-01-28.
  */
 public class GuessNumber {
-    private int randomNumber;
+    private RandomNumber randomNumber;
     private int userGuess;
     private String message;
     private int trials;
 
-    public GuessNumber(){
-        this.randomNumber = (int) (Math.random() * 1000);
-    }
-
-    public int getRandomNumber() {
-        return this.randomNumber;
+    public GuessNumber(RandomNumber randomNumber){
+        this.randomNumber = randomNumber;
     }
 
     public void setUserGuess(int userGuess) {
@@ -25,7 +23,7 @@ public class GuessNumber {
     }
 
     public void grabUserTips() throws MaiorQueException, MenorQueException {
-        if (this.userGuess < this.getRandomNumber()) {
+        if (this.userGuess < this.randomNumber.getRandomNumber()) {
             throw new MenorQueException();
         } else {
             throw new MaiorQueException();
